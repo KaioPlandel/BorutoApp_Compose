@@ -1,10 +1,12 @@
 package com.plandel.borutoapp_compose.data.local.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.plandel.borutoapp_compose.domain.model.HeroRemoteKey
 
+@Dao
 interface HeroRemoteKeyDao {
 
     @Query("SELECT * FROM hero_remote_key_table WHERE id= :id")
