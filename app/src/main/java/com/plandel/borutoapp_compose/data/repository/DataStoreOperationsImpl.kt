@@ -1,4 +1,4 @@
-package com.plandel.borutoapp_compose.data.pref
+package com.plandel.borutoapp_compose.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore

@@ -1,8 +1,12 @@
 package com.plandel.borutoapp_compose.di
 
 import android.content.Context
-import com.plandel.borutoapp_compose.data.pref.DataStoreOperationsImpl
+import com.plandel.borutoapp_compose.data.repository.DataStoreOperationsImpl
+import com.plandel.borutoapp_compose.data.repository.Repository
 import com.plandel.borutoapp_compose.domain.repository.DataStoreOperations
+import com.plandel.borutoapp_compose.domain.use_cases.UseCases
+import com.plandel.borutoapp_compose.domain.use_cases.readonboarding.ReadOnBoardingUseCase
+import com.plandel.borutoapp_compose.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +24,15 @@ object RepositoryModule {
         @ApplicationContext context: Context
     ): DataStoreOperations {
         return DataStoreOperationsImpl(context = context)
+    }
+
+    @Provides
+    @Singleton
+    fun providesUseCases(repository: Repository): UseCases {
+        return UseCases(
+            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+        )
     }
 
 }

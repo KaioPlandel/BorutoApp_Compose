@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.*
 import com.plandel.borutoapp_compose.R
@@ -26,7 +27,10 @@ import com.plandel.borutoapp_compose.ui.theme.*
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
@@ -59,7 +63,9 @@ fun WelcomeScreen(navController: NavHostController) {
             spacing = PAGING_INDICATOR_SPACING,
         )
         FinishButton(modifier = Modifier.weight(1f), pagerState = pagerState) {
+            navController.popBackStack()
             navController.navigate(Screen.Home.route)
+            welcomeViewModel.saveOnBoardingState(completed = true)
         }
     }
 }
