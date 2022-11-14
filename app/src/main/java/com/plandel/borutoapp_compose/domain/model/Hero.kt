@@ -3,6 +3,7 @@ package com.plandel.borutoapp_compose.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@kotlinx.serialization.Serializable
 @Entity(tableName = "hero_table")
 data class Hero(
     @PrimaryKey(autoGenerate = false)
