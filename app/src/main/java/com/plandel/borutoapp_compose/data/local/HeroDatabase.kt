@@ -14,6 +14,6 @@ abstract class HeroDatabase : RoomDatabase() {
 
     abstract fun heroDao(): HeroDao
 
-    abstract fun heroRemoteKeyDao(): HeroRemoteKeyDao
+    abstract fun heroRemoteKeysDao(): HeroRemoteKeyDao
 
 }
