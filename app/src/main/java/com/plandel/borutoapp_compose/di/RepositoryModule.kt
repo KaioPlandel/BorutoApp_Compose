@@ -5,6 +5,7 @@ import com.plandel.borutoapp_compose.data.repository.DataStoreOperationsImpl
 import com.plandel.borutoapp_compose.data.repository.Repository
 import com.plandel.borutoapp_compose.domain.repository.DataStoreOperations
 import com.plandel.borutoapp_compose.domain.use_cases.UseCases
+import com.plandel.borutoapp_compose.domain.use_cases.get_all_heroes.GetAllHeroesUseCases
 import com.plandel.borutoapp_compose.domain.use_cases.readonboarding.ReadOnBoardingUseCase
 import com.plandel.borutoapp_compose.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -31,7 +32,8 @@ object RepositoryModule {
     fun providesUseCases(repository: Repository): UseCases {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            getAllHeroesUseCases = GetAllHeroesUseCases(repository)
         )
     }
 

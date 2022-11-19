@@ -1,7 +1,10 @@
 package com.plandel.borutoapp_compose.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.plandel.borutoapp_compose.data.local.HeroDatabase
 import com.plandel.borutoapp_compose.data.remote.BorutoApi
+import com.plandel.borutoapp_compose.data.repository.RemoteDataSourceImpl
+import com.plandel.borutoapp_compose.domain.repository.RemoteDataSource
 import com.plandel.borutoapp_compose.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,5 +48,17 @@ object NetworkModule {
     @Singleton
     fun provideBorutoApi(retrofit: Retrofit): BorutoApi {
         return retrofit.create(BorutoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        borutoApi: BorutoApi,
+        borutoDatabase: HeroDatabase
+    ) : RemoteDataSource {
+        return RemoteDataSourceImpl(
+            borutoApi = borutoApi,
+            borutoDatabase = borutoDatabase
+        )
     }
 }
